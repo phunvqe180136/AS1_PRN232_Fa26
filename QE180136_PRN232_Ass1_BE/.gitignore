@@ -1,0 +1,12 @@
+## Ignore logs, build outputs, secrets
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.vscode/
+
+# Secrets — never commit real connection strings
+appsettings.Local.json
+*.env.local
+.env

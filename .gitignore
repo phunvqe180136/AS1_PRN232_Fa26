@@ -1,0 +1,22 @@
+# Visual Studio & .NET
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+**/*.suo
+
+# Node & Next.js
+**/node_modules/
+**/.next/
+**/out/
+
+# Environments & Local Configs
+**/.env
+**/.env.local
+**/appsettings.Local.json
+**/appsettings.local.json
+
+# IDEs & OS
+**/.vscode/
+**/.DS_Store
+*.log
