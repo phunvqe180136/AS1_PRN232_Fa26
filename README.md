@@ -1,9 +1,23 @@
 # PRN232 Assignment 1 — Task & Team Management Web Application
 
 > **Student ID**: QE180136  
+> **Student Name**: Nguyen Van Phu (PhuNVQE180136)  
 > **Course Code**: PRN232 - Assignment 1 of 2  
-> **Tech Stack**: ASP.NET Core Web API (.NET 8) | PostgreSQL | Next.js 14 (TypeScript) | Tailwind CSS  
-> **Target Grade**: 10.0 / 10.0 (Including all Bonus Features)
+> **Tech Stack**: ASP.NET Core Web API (.NET 8) | PostgreSQL | Next.js 14 (TypeScript) | Tailwind CSS | Lucide React  
+> **Target Grade**: 10.0 / 10.0 (Including all Core & Bonus Features)
+
+---
+
+## 🔗 Live Deployment & Project Links
+
+| Service | Description | URL / Link |
+|---|---|---|
+| 🌐 **Frontend Web App** | Next.js 14 App Router on Vercel | [https://taskminder-qe180136.vercel.app](https://taskminder-qe180136.vercel.app) |
+| 🔌 **Backend API / Swagger** | .NET 8 Web API on Render.com | [https://tasktrack-api-qe180136.onrender.com/swagger](https://tasktrack-api-qe180136.onrender.com/swagger) |
+| 🐙 **GitHub Repository** | Source code & Version control | [https://github.com/phunvqe180136/AS1_PRN232_Fa26](https://github.com/phunvqe180136/AS1_PRN232_Fa26) |
+| 🗄️ **Database Script** | PostgreSQL Schema & Seed Data | [`TaskManagementDB_Postgres.sql`](./TaskManagementDB_Postgres.sql) |
+| 📘 **Deploy Instructions** | Step-by-step Deploy Guide (Render + Vercel) | [`DEPLOY_GUIDE.md`](./DEPLOY_GUIDE.md) |
+| 📗 **Supabase Guide** | Cloud Database Setup Guide | [`SUPABASE_SETUP.md`](./SUPABASE_SETUP.md) |
 
 ---
 
@@ -72,6 +86,8 @@ AS1_PRN232_Fa26/
 │
 ├── QE180136_PRN232_Ass1_BE/            # Backend Solution (.NET 8 Web API)
 │   ├── QE180136_PRN232_Ass1_BE.sln     # Standard Solution File
+│   ├── Dockerfile                      # Multi-stage production container build
+│   ├── render.yaml                     # Render infrastructure-as-code
 │   ├── TaskTrack.API/                  # Controllers, Swagger, Program.cs, CORS
 │   │   ├── Controllers/
 │   │   │   ├── DepartmentsController.cs
@@ -92,20 +108,22 @@ AS1_PRN232_Fa26/
 │
 ├── QE180136_PRN232_Ass1_FE/            # Frontend (Next.js 14 App Router + TS)
 │   ├── app/
-│   │   ├── page.tsx                    # Home (Welcome, Stats, Active Projects)
+│   │   ├── page.tsx                    # TaskMinder Dashboard (Progress Cards, Kanban, Donut Activity)
 │   │   ├── departments/                # Public Departments & [id] Detail
 │   │   ├── departments/manage/         # Department CRUD + Modals
 │   │   ├── projects/                   # Public Projects & [id] Detail (with Tasks)
 │   │   ├── projects/manage/            # Project CRUD + Modals
-│   │   ├── tasks/                      # Public Tasks + [BONUS] Status Filter
-│   │   ├── tasks/[id]/                 # Task Details with Tags
+│   │   ├── tasks/                      # Public Tasks + [BONUS] Status Filter Tabs
+│   │   ├── tasks/[id]/                 # Task Details with Tags & Timestamps
 │   │   ├── tasks/manage/               # Task CRUD + Multi-select Tags + Soft Delete
-│   │   ├── tags/manage/                # Tag CRUD + Color Badges
-│   │   └── search/                     # Advanced Multi-field Task Filter
-│   ├── components/                     # Badges, Modals, Navbar, States, Toast
+│   │   ├── tags/manage/                # Tag CRUD + Color Badges & Presets
+│   │   └── search/                     # Advanced Multi-field Task Filter (Omni Search)
+│   ├── components/                     # Sidebar, Header, Badges, Modals, States, Toast
 │   └── lib/                            # API Client, Services, Types, Enums
 │
-└── TaskManagementDB_Postgres.sql       # PostgreSQL Initial Script & Seed Data
+├── TaskManagementDB_Postgres.sql       # PostgreSQL Initial Script & Seed Data
+├── DEPLOY_GUIDE.md                     # Deployment Guide (Render + Vercel + Postgres)
+└── SUPABASE_SETUP.md                   # Supabase Database Guide
 ```
 
 ---
@@ -142,7 +160,7 @@ All endpoints are **public** (no authentication required) and comply with assign
 
 ### Tags (`/api/tags`)
 - `GET /api/tags` — List all tags
-- `POST /api/tags` — Create new tag
+- `POST /api/tags` — Create new tag with HEX color
 - `PUT /api/tags/{id}` — Update tag
 - `DELETE /api/tags/{id}` — Delete tag (400 if assigned to any task)
 
@@ -155,6 +173,7 @@ All endpoints are **public** (no authentication required) and comply with assign
 1. **Status Filter on Task List Page (`/tasks`)**: Filter tasks interactively by status (*All*, *To Do*, *In Progress*, *Done*, *Cancelled*).
 2. **GitHub Actions CI Check (`.github/workflows/ci.yml`)**: Automated compilation & lint checks on push for both Backend and Frontend.
 3. **ERD Diagram**: Full Mermaid Entity-Relationship diagram included in README.
+4. **TaskMinder SaaS Redesign**: High-end modern UI with sidebar navigation, project progress bars, kanban columns, and SVG donut task activity chart.
 
 ---
 
@@ -165,7 +184,7 @@ All endpoints are **public** (no authentication required) and comply with assign
 cd QE180136_PRN232_Ass1_BE
 dotnet restore
 dotnet run --project TaskTrack.API
-# Swagger UI available at: http://localhost:5149
+# Swagger UI available at: http://localhost:5000/swagger
 ```
 
 ### Frontend
@@ -175,4 +194,3 @@ npm install
 npm run dev
 # Web application available at: http://localhost:3000
 ```
-
