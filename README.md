@@ -1,7 +1,7 @@
 # PRN232 Assignment 1 — Task & Team Management Web Application
 
 > **Student ID**: QE180136  
-> **Student Name**: Nguyen Van Phu (PhuNVQE180136)  
+> **Student Name**: Nguyen Vinh Phu (PhuNVQE180136)  
 > **Course Code**: PRN232 - Assignment 1 of 2  
 > **Tech Stack**: ASP.NET Core Web API (.NET 8) | PostgreSQL | Next.js 14 (TypeScript) | Tailwind CSS | Lucide React  
 > **Target Grade**: 10.0 / 10.0 (Including all Core & Bonus Features)
